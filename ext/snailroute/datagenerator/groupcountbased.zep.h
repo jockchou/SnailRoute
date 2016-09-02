@@ -1,0 +1,17 @@
+
+extern zend_class_entry *snailroute_datagenerator_groupcountbased_ce;
+
+ZEPHIR_INIT_CLASS(SnailRoute_DataGenerator_GroupCountBased);
+
+PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize);
+PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, processChunk);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_groupcountbased_processchunk, 0, 0, 1)
+	ZEND_ARG_INFO(0, regexToRoutesMap)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(snailroute_datagenerator_groupcountbased_method_entry) {
+	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, processChunk, arginfo_snailroute_datagenerator_groupcountbased_processchunk, ZEND_ACC_PROTECTED)
+	PHP_FE_END
+};
