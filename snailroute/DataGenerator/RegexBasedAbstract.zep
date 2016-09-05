@@ -10,7 +10,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     protected methodToRegexToRoutesMap = [];
 
     public abstract function getApproxChunkSize() -> int;
-    public abstract function processChunk(regexToRoutesMap) -> array;
+    public abstract function processChunk(array regexToRoutesMap) -> array;
     
     public function addRoute(string httpMethod, array routeData, callable handler) {
         if this->isStaticRoute(routeData) {
@@ -32,6 +32,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     private function generateVariableRouteData() -> array
     {
         var method, chunkSize, chunks, regexToRoutesMap, data = [];
+        
         for method, regexToRoutesMap in this->methodToRegexToRoutesMap {
             let chunkSize = this->computeChunkSize(count(regexToRoutesMap));
             let chunks = array_chunk(regexToRoutesMap, chunkSize, true);
@@ -42,7 +43,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         return data;
     }
 
-    private function computeChunkSize(count)
+    private function computeChunkSize(int count)
     {
         var numParts = max(1, round(count / this->getApproxChunkSize()));
         return ceil(count / numParts);

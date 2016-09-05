@@ -40,16 +40,17 @@ PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize) {
 
 PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, processChunk) {
 
-	zval *_10$$3 = NULL;
 	HashTable *_1;
 	HashPosition _0;
 	int ZEPHIR_LAST_CALL_STATUS, _12$$3;
 	zephir_fcall_cache_entry *_5 = NULL, *_8 = NULL;
-	zval *regexToRoutesMap, *routeMap = NULL, *regexes = NULL, *numGroups = NULL, *regex = NULL, *route = NULL, *numVariables = NULL, *regexStr = NULL, **_2, *_13, *_3$$3 = NULL, *_4$$3 = NULL, _6$$3 = zval_used_for_init, _7$$3 = zval_used_for_init, *_9$$3 = NULL, *_11$$3 = NULL;
+	zval *regexToRoutesMap_param = NULL, *routeMap = NULL, *regexes = NULL, *numGroups = NULL, *regex = NULL, *route = NULL, *numVariables = NULL, *regexStr = NULL, **_2, *_13, *_3$$3 = NULL, *_4$$3 = NULL, _6$$3 = zval_used_for_init, _7$$3 = zval_used_for_init, *_9$$3 = NULL, *_11$$3 = NULL;
+	zval *regexToRoutesMap = NULL, *_10$$3 = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &regexToRoutesMap);
+	zephir_fetch_params(1, 1, 0, &regexToRoutesMap_param);
 
+	zephir_get_arrval(regexToRoutesMap, regexToRoutesMap_param);
 
 
 	ZEPHIR_INIT_VAR(routeMap);

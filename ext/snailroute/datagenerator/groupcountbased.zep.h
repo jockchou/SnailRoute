@@ -7,7 +7,7 @@ PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize);
 PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, processChunk);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_groupcountbased_processchunk, 0, 0, 1)
-	ZEND_ARG_INFO(0, regexToRoutesMap)
+	ZEND_ARG_ARRAY_INFO(0, regexToRoutesMap, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(snailroute_datagenerator_groupcountbased_method_entry) {

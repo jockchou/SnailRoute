@@ -7,7 +7,7 @@ class GroupCountBased extends RegexBasedAbstract
         return 10;
     }
 
-    public function processChunk(var regexToRoutesMap) -> array
+    public function processChunk(array regexToRoutesMap) -> array
     {
         var routeMap = [], regexes = [], numGroups = 0, regex, route, numVariables, regexStr;
         

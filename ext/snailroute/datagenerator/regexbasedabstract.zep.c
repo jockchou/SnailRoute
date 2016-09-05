@@ -117,7 +117,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, generateVariableRouteDat
 	ZEPHIR_INIT_VAR(data);
 	array_init(data);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("methodToRegexToRoutesMap"), PH_NOISY_CC);
-	zephir_is_iterable(_0, &_2, &_1, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 42);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 43);
 	for (
 	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_2, &_1)
@@ -146,26 +146,27 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, generateVariableRouteDat
 
 PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, computeChunkSize) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *count, *numParts = NULL, *_0, *_1 = NULL, _2, *_3, _4;
+	zval *count_param = NULL, *numParts = NULL, *_0, *_1 = NULL, _2, *_3, _4;
+	int count, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &count);
+	zephir_fetch_params(1, 1, 0, &count_param);
 
+	count = zephir_get_intval(count_param);
 
 
 	ZEPHIR_INIT_VAR(_0);
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getapproxchunksize", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_2);
-	div_function(&_2, count, _1 TSRMLS_CC);
+	ZVAL_DOUBLE(&_2, zephir_safe_div_long_zval(count, _1 TSRMLS_CC));
 	zephir_round(_0, &_2, NULL, NULL TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	ZVAL_LONG(_3, 1);
 	ZEPHIR_CALL_FUNCTION(&numParts, "max", NULL, 8, _3, _0);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_4);
-	div_function(&_4, count, numParts TSRMLS_CC);
+	ZVAL_DOUBLE(&_4, zephir_safe_div_long_zval(count, numParts TSRMLS_CC));
 	RETURN_MM_DOUBLE(zephir_ceil(&_4 TSRMLS_CC));
 
 }
@@ -184,7 +185,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, isStaticRoute) {
 
 	_0 = zephir_fast_count_int(routeData TSRMLS_CC) == 1;
 	if (_0) {
-		zephir_array_fetch_long(&_1, routeData, 0, PH_NOISY | PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 53 TSRMLS_CC);
+		zephir_array_fetch_long(&_1, routeData, 0, PH_NOISY | PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 54 TSRMLS_CC);
 		_0 = Z_TYPE_P(_1) == IS_STRING;
 	}
 	RETURN_MM_BOOL(_0);
@@ -209,9 +210,9 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, addStaticRoute) {
 
 
 	ZEPHIR_OBS_VAR(routeStr);
-	zephir_array_fetch_long(&routeStr, routeData, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 58 TSRMLS_CC);
+	zephir_array_fetch_long(&routeStr, routeData, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 59 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("staticRoutes"), PH_NOISY_CC);
-	zephir_array_fetch(&_1, _0, httpMethod, PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 60 TSRMLS_CC);
+	zephir_array_fetch(&_1, _0, httpMethod, PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 61 TSRMLS_CC);
 	if (zephir_array_isset(_1, routeStr)) {
 		ZEPHIR_INIT_VAR(_2$$3);
 		object_init_ex(_2$$3, zend_exception_get_default(TSRMLS_C));
@@ -221,15 +222,15 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, addStaticRoute) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _2$$3, "__construct", NULL, 10, _4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2$$3, "snailroute/DataGenerator/RegexBasedAbstract.zep", 64 TSRMLS_CC);
+		zephir_throw_exception_debug(_2$$3, "snailroute/DataGenerator/RegexBasedAbstract.zep", 65 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	_6 = zephir_fetch_nproperty_this(this_ptr, SL("methodToRegexToRoutesMap"), PH_NOISY_CC);
 	if (zephir_array_isset(_6, httpMethod)) {
 		_7$$4 = zephir_fetch_nproperty_this(this_ptr, SL("methodToRegexToRoutesMap"), PH_NOISY_CC);
-		zephir_array_fetch(&_8$$4, _7$$4, httpMethod, PH_NOISY | PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 68 TSRMLS_CC);
-		zephir_is_iterable(_8$$4, &_10$$4, &_9$$4, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 76);
+		zephir_array_fetch(&_8$$4, _7$$4, httpMethod, PH_NOISY | PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 69 TSRMLS_CC);
+		zephir_is_iterable(_8$$4, &_10$$4, &_9$$4, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 77);
 		for (
 		  ; zephir_hash_get_current_data_ex(_10$$4, (void**) &_11$$4, &_9$$4) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_10$$4, &_9$$4)
@@ -248,7 +249,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, addStaticRoute) {
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, _13$$6, "__construct", NULL, 10, _16$$6);
 				zephir_check_call_status();
-				zephir_throw_exception_debug(_13$$6, "snailroute/DataGenerator/RegexBasedAbstract.zep", 73 TSRMLS_CC);
+				zephir_throw_exception_debug(_13$$6, "snailroute/DataGenerator/RegexBasedAbstract.zep", 74 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
 				return;
 			}
@@ -276,11 +277,11 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, addVariableRoute) {
 	ZEPHIR_CALL_METHOD(&tmpData, this_ptr, "buildregexforroute", NULL, 11, routeData);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(regex);
-	zephir_array_fetch_long(&regex, tmpData, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 86 TSRMLS_CC);
+	zephir_array_fetch_long(&regex, tmpData, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 87 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(variables);
-	zephir_array_fetch_long(&variables, tmpData, 1, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 87 TSRMLS_CC);
+	zephir_array_fetch_long(&variables, tmpData, 1, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 88 TSRMLS_CC);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("methodToRegexToRoutesMap"), PH_NOISY_CC);
-	zephir_array_fetch(&_1, _0, httpMethod, PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 89 TSRMLS_CC);
+	zephir_array_fetch(&_1, _0, httpMethod, PH_READONLY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 90 TSRMLS_CC);
 	if (zephir_array_isset(_1, regex)) {
 		ZEPHIR_INIT_VAR(_2$$3);
 		object_init_ex(_2$$3, zend_exception_get_default(TSRMLS_C));
@@ -290,7 +291,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, addVariableRoute) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _2$$3, "__construct", NULL, 10, _4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2$$3, "snailroute/DataGenerator/RegexBasedAbstract.zep", 93 TSRMLS_CC);
+		zephir_throw_exception_debug(_2$$3, "snailroute/DataGenerator/RegexBasedAbstract.zep", 94 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -322,7 +323,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, buildRegexForRoute) {
 	ZVAL_STRING(regex, "", 1);
 	ZEPHIR_INIT_VAR(variables);
 	array_init(variables);
-	zephir_is_iterable(routeData, &_1, &_0, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 130);
+	zephir_is_iterable(routeData, &_1, &_0, 0, 0, "snailroute/DataGenerator/RegexBasedAbstract.zep", 131);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -339,9 +340,9 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, buildRegexForRoute) {
 			continue;
 		}
 		ZEPHIR_OBS_NVAR(varName);
-		zephir_array_fetch_long(&varName, part, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 110 TSRMLS_CC);
+		zephir_array_fetch_long(&varName, part, 0, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 111 TSRMLS_CC);
 		ZEPHIR_OBS_NVAR(regexPart);
-		zephir_array_fetch_long(&regexPart, part, 1, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 111 TSRMLS_CC);
+		zephir_array_fetch_long(&regexPart, part, 1, PH_NOISY, "snailroute/DataGenerator/RegexBasedAbstract.zep", 112 TSRMLS_CC);
 		if (zephir_array_isset(variables, varName)) {
 			ZEPHIR_INIT_NVAR(_7$$5);
 			object_init_ex(_7$$5, zend_exception_get_default(TSRMLS_C));
@@ -351,7 +352,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, buildRegexForRoute) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, _7$$5, "__construct", &_11, 10, _9$$5);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_7$$5, "snailroute/DataGenerator/RegexBasedAbstract.zep", 116 TSRMLS_CC);
+			zephir_throw_exception_debug(_7$$5, "snailroute/DataGenerator/RegexBasedAbstract.zep", 117 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -366,7 +367,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, buildRegexForRoute) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, _14$$6, "__construct", &_11, 10, _16$$6);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(_14$$6, "snailroute/DataGenerator/RegexBasedAbstract.zep", 123 TSRMLS_CC);
+			zephir_throw_exception_debug(_14$$6, "snailroute/DataGenerator/RegexBasedAbstract.zep", 124 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}

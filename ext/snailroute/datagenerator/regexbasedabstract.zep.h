@@ -17,7 +17,7 @@ PHP_METHOD(SnailRoute_DataGenerator_RegexBasedAbstract, regexHasCapturingGroups)
 zend_object_value zephir_init_properties_SnailRoute_DataGenerator_RegexBasedAbstract(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_processchunk, 0, 0, 1)
-	ZEND_ARG_INFO(0, regexToRoutesMap)
+	ZEND_ARG_ARRAY_INFO(0, regexToRoutesMap, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_addroute, 0, 0, 3)
