@@ -11,7 +11,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_groupcountbased_processc
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(snailroute_datagenerator_groupcountbased_method_entry) {
-	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize, NULL, ZEND_ACC_PROTECTED)
-	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, processChunk, arginfo_snailroute_datagenerator_groupcountbased_processchunk, ZEND_ACC_PROTECTED)
+	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, getApproxChunkSize, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(SnailRoute_DataGenerator_GroupCountBased, processChunk, arginfo_snailroute_datagenerator_groupcountbased_processchunk, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

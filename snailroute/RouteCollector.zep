@@ -28,15 +28,13 @@ class RouteCollector
     public function addRoute(var httpMethod, string route, callable handler)
     {
         var routeDatas, routeData, method;
-        
         let routeDatas = this->routeParser->parse(route);
-       
-        for method in (array)httpMethod {
+        
+        for method in [httpMethod] {
             for routeData in routeDatas {
                 this->dataGenerator->addRoute(method, routeData, handler);
             }
         }
-        
     }
     
     /**

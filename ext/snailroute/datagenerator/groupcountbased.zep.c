@@ -45,7 +45,7 @@ PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, processChunk) {
 	HashPosition _0;
 	int ZEPHIR_LAST_CALL_STATUS, _12$$3;
 	zephir_fcall_cache_entry *_5 = NULL, *_8 = NULL;
-	zval *regexToRoutesMap, *routeMap = NULL, *regexes = NULL, *numGroups = NULL, *regex = NULL, *route = NULL, *numVariables = NULL, **_2, *_13, *_3$$3 = NULL, *_4$$3 = NULL, _6$$3 = zval_used_for_init, _7$$3 = zval_used_for_init, *_9$$3 = NULL, *_11$$3 = NULL;
+	zval *regexToRoutesMap, *routeMap = NULL, *regexes = NULL, *numGroups = NULL, *regex = NULL, *route = NULL, *numVariables = NULL, *regexStr = NULL, **_2, *_13, *_3$$3 = NULL, *_4$$3 = NULL, _6$$3 = zval_used_for_init, _7$$3 = zval_used_for_init, *_9$$3 = NULL, *_11$$3 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &regexToRoutesMap);
@@ -96,10 +96,10 @@ PHP_METHOD(SnailRoute_DataGenerator_GroupCountBased, processChunk) {
 	}
 	ZEPHIR_INIT_VAR(_13);
 	zephir_fast_join_str(_13, SL("|"), regexes TSRMLS_CC);
-	ZEPHIR_INIT_VAR(regex);
-	ZEPHIR_CONCAT_SVS(regex, "~^(?|", _13, ")$~");
+	ZEPHIR_INIT_VAR(regexStr);
+	ZEPHIR_CONCAT_SVS(regexStr, "~^(?|", _13, ")$~");
 	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-	zephir_array_update_string(&return_value, SL("regex"), &regex, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&return_value, SL("regex"), &regexStr, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(&return_value, SL("routeMap"), &routeMap, PH_COPY | PH_SEPARATE);
 	RETURN_MM();
 

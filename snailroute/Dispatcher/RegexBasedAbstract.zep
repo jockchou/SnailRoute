@@ -17,7 +17,7 @@ abstract class RegexBasedAbstract implements DispatcherInterface {
             let handler = this->staticRouteMap[httpMethod][uri];
             return [self::FOUND, handler, []];
         }
-
+        
         let varRouteData = this->variableRouteData;
         
         if isset varRouteData[httpMethod] {
@@ -26,7 +26,7 @@ abstract class RegexBasedAbstract implements DispatcherInterface {
                 return result;
             }
         }
-        
+        die();
         // For HEAD requests, attempt fallback to GET
         if httpMethod === "HEAD" {
             if isset this->staticRouteMap["GET"][uri] {

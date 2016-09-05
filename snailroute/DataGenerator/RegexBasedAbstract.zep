@@ -9,10 +9,9 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     protected staticRoutes = [];
     protected methodToRegexToRoutesMap = [];
 
-    protected abstract function getApproxChunkSize();
-    protected abstract function processChunk(regexToRoutesMap);
+    public abstract function getApproxChunkSize();
+    public abstract function processChunk(regexToRoutesMap);
     
-
     public function addRoute(string httpMethod, array routeData, callable handler) {
         if this->isStaticRoute(routeData) {
             this->addStaticRoute(httpMethod, routeData, handler);
@@ -36,8 +35,10 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         for method, regexToRoutesMap in this->methodToRegexToRoutesMap {
             let chunkSize = this->computeChunkSize(count(regexToRoutesMap));
             let chunks = array_chunk(regexToRoutesMap, chunkSize, true);
+           
             let data[method] = array_map([this, "processChunk"], chunks);
         }
+        
         return data;
     }
 
@@ -82,6 +83,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         var tmpData, regex, variables;
         
         let tmpData = this->buildRegexForRoute(routeData);
+        
         let regex = tmpData[0];
         let variables = tmpData[1];
         
@@ -130,6 +132,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     }
 
     private function regexHasCapturingGroups(regex) {
+    
         if false === strpos(regex, "(") {
             // Needs to have at least a ( to contain a capturing group
             return false;

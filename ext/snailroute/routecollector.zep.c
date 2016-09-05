@@ -15,8 +15,9 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
+#include "kernel/array.h"
 #include "kernel/hash.h"
+#include "kernel/operators.h"
 
 
 ZEPHIR_INIT_CLASS(SnailRoute_RouteCollector) {
@@ -63,7 +64,7 @@ PHP_METHOD(SnailRoute_RouteCollector, addRoute) {
 
 	HashTable *_3, *_6$$3;
 	HashPosition _2, _5$$3;
-	zval *_1 = NULL;
+	zval *_1;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *route = NULL;
 	zval *httpMethod, *route_param = NULL, *handler, *routeDatas = NULL, *routeData = NULL, *method = NULL, *_0, **_4, **_7$$3, *_8$$4;
@@ -77,14 +78,16 @@ PHP_METHOD(SnailRoute_RouteCollector, addRoute) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("routeParser"), PH_NOISY_CC);
 	ZEPHIR_CALL_METHOD(&routeDatas, _0, "parse", NULL, 0, route);
 	zephir_check_call_status();
-	zephir_get_arrval(_1, httpMethod);
-	zephir_is_iterable(_1, &_3, &_2, 0, 0, "snailroute/RouteCollector.zep", 40);
+	ZEPHIR_INIT_VAR(_1);
+	zephir_create_array(_1, 1, 0 TSRMLS_CC);
+	zephir_array_fast_append(_1, httpMethod);
+	zephir_is_iterable(_1, &_3, &_2, 0, 0, "snailroute/RouteCollector.zep", 38);
 	for (
 	  ; zephir_hash_get_current_data_ex(_3, (void**) &_4, &_2) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_3, &_2)
 	) {
 		ZEPHIR_GET_HVALUE(method, _4);
-		zephir_is_iterable(routeDatas, &_6$$3, &_5$$3, 0, 0, "snailroute/RouteCollector.zep", 38);
+		zephir_is_iterable(routeDatas, &_6$$3, &_5$$3, 0, 0, "snailroute/RouteCollector.zep", 37);
 		for (
 		  ; zephir_hash_get_current_data_ex(_6$$3, (void**) &_7$$3, &_5$$3) == SUCCESS
 		  ; zephir_hash_move_forward_ex(_6$$3, &_5$$3)

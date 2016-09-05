@@ -17,6 +17,7 @@
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "kernel/operators.h"
+#include "kernel/exit.h"
 #include "kernel/hash.h"
 
 
@@ -82,6 +83,8 @@ PHP_METHOD(SnailRoute_Dispatcher_RegexBasedAbstract, dispatch) {
 			RETURN_CCTOR(result);
 		}
 	}
+	ZEPHIR_MM_RESTORE();
+	zephir_exit_empty();
 	if (ZEPHIR_IS_STRING_IDENTICAL(httpMethod, "HEAD")) {
 		_8$$6 = zephir_fetch_nproperty_this(this_ptr, SL("staticRouteMap"), PH_NOISY_CC);
 		zephir_array_fetch_string(&_9$$6, _8$$6, SL("GET"), PH_READONLY, "snailroute/Dispatcher/RegexBasedAbstract.zep", 32 TSRMLS_CC);
