@@ -7,7 +7,7 @@ use SnailRoute\RouteParserInterface;
  *
  * "/user/{name}[/{id:[0-9]+}]"
  */
-class Std implements RouteParserInterface
+class StdRouteParser implements RouteParserInterface
 {
 
     const VARIABLE_REGEX = "
@@ -20,7 +20,7 @@ class Std implements RouteParserInterface
  
     const DEFAULT_DISPATCH_REGEX = "[^/]+";
     
-    public function parse(string route)
+    public function parse(string route) -> array
     {
         var withoutClosingOpt, numOptionals, segments, n, segment, currentRoute = "", routeDatas = [];
         
@@ -48,7 +48,8 @@ class Std implements RouteParserInterface
         return routeDatas;
     }
     
-    private function parsePlaceholders(string route) {
+    private function parsePlaceholders(string route) -> array
+    {
         var set, matches = [], offset = 0, routeData = [];
         
         if (!preg_match_all("~" . self::VARIABLE_REGEX . "~x", route, matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER)) {

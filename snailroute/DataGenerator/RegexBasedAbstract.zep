@@ -9,8 +9,8 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     protected staticRoutes = [];
     protected methodToRegexToRoutesMap = [];
 
-    public abstract function getApproxChunkSize();
-    public abstract function processChunk(regexToRoutesMap);
+    public abstract function getApproxChunkSize() -> int;
+    public abstract function processChunk(regexToRoutesMap) -> array;
     
     public function addRoute(string httpMethod, array routeData, callable handler) {
         if this->isStaticRoute(routeData) {
@@ -20,7 +20,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         }
     }
 
-    public function getData() {
+    public function getData() -> array {
         if empty this->methodToRegexToRoutesMap {
             return [this->staticRoutes, []];
         }
@@ -29,7 +29,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
     }
 
     
-    private function generateVariableRouteData()
+    private function generateVariableRouteData() -> array
     {
         var method, chunkSize, chunks, regexToRoutesMap, data = [];
         for method, regexToRoutesMap in this->methodToRegexToRoutesMap {
@@ -48,12 +48,12 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         return ceil(count / numParts);
     }
 
-    private function isStaticRoute(routeData)
+    private function isStaticRoute(array routeData) -> boolean
     {
         return count(routeData) === 1 && is_string(routeData[0]);
     }
 
-    private function addStaticRoute(httpMethod, routeData, handler)
+    private function addStaticRoute(string httpMethod, array routeData, callable handler)
     {
         var route, routeStr = routeData[0];
 
@@ -78,12 +78,11 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         let this->staticRoutes[httpMethod][routeStr] = handler;
     }
 
-    private function addVariableRoute(httpMethod, routeData, handler)
+    private function addVariableRoute(string httpMethod, array routeData, callable handler)
     {
         var tmpData, regex, variables;
         
         let tmpData = this->buildRegexForRoute(routeData);
-        
         let regex = tmpData[0];
         let variables = tmpData[1];
         
@@ -99,7 +98,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         );
     }
 
-    private function buildRegexForRoute(routeData)
+    private function buildRegexForRoute(array routeData) -> array
     {
         var varName, regexPart, part, regex = "", variables = [];
         for part in routeData {
@@ -117,7 +116,7 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
                 ));
             }
 
-            if ($this->regexHasCapturingGroups($regexPart)) {
+            if this->regexHasCapturingGroups(regexPart) {
                 throw new \Exception(sprintf(
                     "Regex \"%s\" for parameter \"%s\" contains a capturing group",
                     regexPart, varName
@@ -131,7 +130,8 @@ abstract class RegexBasedAbstract implements DataGeneratorInterface
         return [regex, variables];
     }
 
-    private function regexHasCapturingGroups(regex) {
+    private function regexHasCapturingGroups(string regex) -> boolean
+    {
     
         if false === strpos(regex, "(") {
             // Needs to have at least a ( to contain a capturing group

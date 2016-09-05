@@ -47,7 +47,7 @@ PHP_METHOD(SnailRoute_SnailRoute, simpleDispatcher) {
 
 	ZEPHIR_INIT_VAR(defaultOpts);
 	zephir_create_array(defaultOpts, 4, 0 TSRMLS_CC);
-	add_assoc_stringl_ex(defaultOpts, SS("routeParser"), SL("SnailRoute\\RouteParser\\Std"), 1);
+	add_assoc_stringl_ex(defaultOpts, SS("routeParser"), SL("SnailRoute\\RouteParser\\StdRouteParser"), 1);
 	add_assoc_stringl_ex(defaultOpts, SS("dataGenerator"), SL("SnailRoute\\DataGenerator\\GroupCountBased"), 1);
 	add_assoc_stringl_ex(defaultOpts, SS("dispatcher"), SL("SnailRoute\\Dispatcher\\GroupCountBased"), 1);
 	add_assoc_stringl_ex(defaultOpts, SS("routeCollector"), SL("SnailRoute\\RouteCollector"), 1);

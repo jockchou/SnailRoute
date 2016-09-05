@@ -31,23 +31,23 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_compu
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_isstaticroute, 0, 0, 1)
-	ZEND_ARG_INFO(0, routeData)
+	ZEND_ARG_ARRAY_INFO(0, routeData, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_addstaticroute, 0, 0, 3)
 	ZEND_ARG_INFO(0, httpMethod)
-	ZEND_ARG_INFO(0, routeData)
+	ZEND_ARG_ARRAY_INFO(0, routeData, 0)
 	ZEND_ARG_INFO(0, handler)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_addvariableroute, 0, 0, 3)
 	ZEND_ARG_INFO(0, httpMethod)
-	ZEND_ARG_INFO(0, routeData)
+	ZEND_ARG_ARRAY_INFO(0, routeData, 0)
 	ZEND_ARG_INFO(0, handler)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_buildregexforroute, 0, 0, 1)
-	ZEND_ARG_INFO(0, routeData)
+	ZEND_ARG_ARRAY_INFO(0, routeData, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_snailroute_datagenerator_regexbasedabstract_regexhascapturinggroups, 0, 0, 1)

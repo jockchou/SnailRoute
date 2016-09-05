@@ -36,7 +36,7 @@ zend_class_entry *snailroute_datagenerator_groupcountbased_ce;
 zend_class_entry *snailroute_dispatcher_groupcountbased_ce;
 zend_class_entry *snailroute_route_ce;
 zend_class_entry *snailroute_routecollector_ce;
-zend_class_entry *snailroute_routeparser_std_ce;
+zend_class_entry *snailroute_routeparser_stdrouteparser_ce;
 zend_class_entry *snailroute_snailroute_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(snailroute)
@@ -72,7 +72,7 @@ static PHP_MINIT_FUNCTION(snailroute)
 	ZEPHIR_INIT(SnailRoute_Dispatcher_GroupCountBased);
 	ZEPHIR_INIT(SnailRoute_Route);
 	ZEPHIR_INIT(SnailRoute_RouteCollector);
-	ZEPHIR_INIT(SnailRoute_RouteParser_Std);
+	ZEPHIR_INIT(SnailRoute_RouteParser_StdRouteParser);
 	ZEPHIR_INIT(SnailRoute_SnailRoute);
 
 #if PHP_VERSION_ID < 50500

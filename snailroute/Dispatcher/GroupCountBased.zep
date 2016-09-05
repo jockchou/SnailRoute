@@ -9,8 +9,8 @@ class GroupCountBased extends RegexBasedAbstract
         let this->variableRouteData = data[1];
     } 
     
-    protected function dispatchVariableRoute(array routeData, string uri) {
-        
+    protected function dispatchVariableRoute(array routeData, string uri) -> array
+    {
         var varName, data, matches = null, handler, varNames, vars= [], i = 0, matchedRoute;
         
         for data in routeData {

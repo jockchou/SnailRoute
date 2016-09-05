@@ -31,5 +31,5 @@ interface RouteParserInterface
      * 
      * @return mixed[][] Array of route data arrays
      */
-    public function parse(string route);
+    public function parse(string route) -> array;
 }

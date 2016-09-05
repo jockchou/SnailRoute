@@ -9,7 +9,7 @@ class SnailRoute
         var routeCollector, defaultOpts, routeCollectorClass, routeParserClass, dataGeneratorClass, dispatcherClass;
         
         let defaultOpts = [
-            "routeParser" : "SnailRoute\\RouteParser\\Std",
+            "routeParser" : "SnailRoute\\RouteParser\\StdRouteParser",
             "dataGenerator" : "SnailRoute\\DataGenerator\\GroupCountBased",
             "dispatcher" : "SnailRoute\\Dispatcher\\GroupCountBased",
             "routeCollector" : "SnailRoute\\RouteCollector"

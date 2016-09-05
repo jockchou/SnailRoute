@@ -13,7 +13,7 @@
 #include "snailroute/dispatcher/groupcountbased.zep.h"
 #include "snailroute/route.zep.h"
 #include "snailroute/routecollector.zep.h"
-#include "snailroute/routeparser/std.zep.h"
+#include "snailroute/routeparser/stdrouteparser.zep.h"
 #include "snailroute/snailroute.zep.h"
 
 #endif

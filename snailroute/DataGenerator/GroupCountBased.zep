@@ -2,12 +2,12 @@ namespace SnailRoute\DataGenerator;
 
 class GroupCountBased extends RegexBasedAbstract
 {
-    public function getApproxChunkSize()
+    public function getApproxChunkSize() -> int
     {
         return 10;
     }
 
-    public function processChunk(var regexToRoutesMap)
+    public function processChunk(var regexToRoutesMap) -> array
     {
         var routeMap = [], regexes = [], numGroups = 0, regex, route, numVariables, regexStr;
         

@@ -16,6 +16,7 @@
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "kernel/array.h"
+#include "kernel/exception.h"
 #include "kernel/hash.h"
 #include "kernel/operators.h"
 
@@ -54,7 +55,7 @@ PHP_METHOD(SnailRoute_RouteCollector, __construct) {
 /**
  * Adds a route to the collection.
  *
- * The syntax used in the $route string depends on the used route parser.
+ * The syntax used in the route string depends on the used route parser.
  *
  * @param string|array httpMethod
  * @param string route
@@ -62,12 +63,11 @@ PHP_METHOD(SnailRoute_RouteCollector, __construct) {
  */
 PHP_METHOD(SnailRoute_RouteCollector, addRoute) {
 
-	HashTable *_3, *_6$$3;
-	HashPosition _2, _5$$3;
-	zval *_1;
+	HashTable *_2, *_5$$6;
+	HashPosition _1, _4$$6;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *route = NULL;
-	zval *httpMethod, *route_param = NULL, *handler, *routeDatas = NULL, *routeData = NULL, *method = NULL, *_0, **_4, **_7$$3, *_8$$4;
+	zval *httpMethod, *route_param = NULL, *handler, *routeDatas = NULL, *routeData = NULL, *method = NULL, *httpMethods = NULL, *_0, **_3, **_6$$6, *_7$$7;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 3, 0, &httpMethod, &route_param, &handler);
@@ -75,26 +75,35 @@ PHP_METHOD(SnailRoute_RouteCollector, addRoute) {
 	zephir_get_strval(route, route_param);
 
 
+	ZEPHIR_INIT_VAR(httpMethods);
+	ZVAL_NULL(httpMethods);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("routeParser"), PH_NOISY_CC);
 	ZEPHIR_CALL_METHOD(&routeDatas, _0, "parse", NULL, 0, route);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(_1);
-	zephir_create_array(_1, 1, 0 TSRMLS_CC);
-	zephir_array_fast_append(_1, httpMethod);
-	zephir_is_iterable(_1, &_3, &_2, 0, 0, "snailroute/RouteCollector.zep", 38);
+	if (Z_TYPE_P(httpMethod) == IS_STRING) {
+		ZEPHIR_INIT_NVAR(httpMethods);
+		zephir_create_array(httpMethods, 1, 0 TSRMLS_CC);
+		zephir_array_fast_append(httpMethods, httpMethod);
+	} else if (Z_TYPE_P(httpMethod) == IS_ARRAY) {
+		ZEPHIR_CPY_WRT(httpMethods, httpMethod);
+	} else {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "Invalid parameter type in httpMethod.", "snailroute/RouteCollector.zep", 39);
+		return;
+	}
+	zephir_is_iterable(httpMethods, &_2, &_1, 0, 0, "snailroute/RouteCollector.zep", 47);
 	for (
-	  ; zephir_hash_get_current_data_ex(_3, (void**) &_4, &_2) == SUCCESS
-	  ; zephir_hash_move_forward_ex(_3, &_2)
+	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
+	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HVALUE(method, _4);
-		zephir_is_iterable(routeDatas, &_6$$3, &_5$$3, 0, 0, "snailroute/RouteCollector.zep", 37);
+		ZEPHIR_GET_HVALUE(method, _3);
+		zephir_is_iterable(routeDatas, &_5$$6, &_4$$6, 0, 0, "snailroute/RouteCollector.zep", 46);
 		for (
-		  ; zephir_hash_get_current_data_ex(_6$$3, (void**) &_7$$3, &_5$$3) == SUCCESS
-		  ; zephir_hash_move_forward_ex(_6$$3, &_5$$3)
+		  ; zephir_hash_get_current_data_ex(_5$$6, (void**) &_6$$6, &_4$$6) == SUCCESS
+		  ; zephir_hash_move_forward_ex(_5$$6, &_4$$6)
 		) {
-			ZEPHIR_GET_HVALUE(routeData, _7$$3);
-			_8$$4 = zephir_fetch_nproperty_this(this_ptr, SL("dataGenerator"), PH_NOISY_CC);
-			ZEPHIR_CALL_METHOD(NULL, _8$$4, "addroute", NULL, 0, method, routeData, handler);
+			ZEPHIR_GET_HVALUE(routeData, _6$$6);
+			_7$$7 = zephir_fetch_nproperty_this(this_ptr, SL("dataGenerator"), PH_NOISY_CC);
+			ZEPHIR_CALL_METHOD(NULL, _7$$7, "addroute", NULL, 0, method, routeData, handler);
 			zephir_check_call_status();
 		}
 	}

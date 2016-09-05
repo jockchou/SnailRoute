@@ -19,7 +19,7 @@ class RouteCollector
     /**
      * Adds a route to the collection.
      *
-     * The syntax used in the $route string depends on the used route parser.
+     * The syntax used in the route string depends on the used route parser.
      *
      * @param string|array httpMethod
      * @param string route
@@ -27,10 +27,19 @@ class RouteCollector
      */
     public function addRoute(var httpMethod, string route, callable handler)
     {
-        var routeDatas, routeData, method;
+        var routeDatas, routeData, method, httpMethods = null;
+        
         let routeDatas = this->routeParser->parse(route);
         
-        for method in [httpMethod] {
+        if typeof httpMethod == "string" {
+            let httpMethods = [httpMethod];
+        } elseif typeof httpMethod == "array" {
+            let httpMethods = httpMethod;
+        } else {
+            throw new \Exception("Invalid parameter type in httpMethod.");
+        }
+        
+        for method in httpMethods {
             for routeData in routeDatas {
                 this->dataGenerator->addRoute(method, routeData, handler);
             }

@@ -7,7 +7,7 @@ abstract class RegexBasedAbstract implements DispatcherInterface {
     protected staticRouteMap;
     protected variableRouteData;
 
-    protected abstract function dispatchVariableRoute(array routeData, string uri);
+    protected abstract function dispatchVariableRoute(array routeData, string uri) -> array;
 
     public function dispatch(string httpMethod, string uri) -> array
     {
@@ -26,7 +26,7 @@ abstract class RegexBasedAbstract implements DispatcherInterface {
                 return result;
             }
         }
-        die();
+        
         // For HEAD requests, attempt fallback to GET
         if httpMethod === "HEAD" {
             if isset this->staticRouteMap["GET"][uri] {
@@ -58,7 +58,7 @@ abstract class RegexBasedAbstract implements DispatcherInterface {
         var routeData, method, uriMap, allowedMethods = [];
         
         for method, uriMap in this->staticRouteMap {
-            if (method !== httpMethod && isset uriMap[uri]) {
+            if method !== httpMethod && isset uriMap[uri] {
                 let allowedMethods[] = method;
             }
         }
