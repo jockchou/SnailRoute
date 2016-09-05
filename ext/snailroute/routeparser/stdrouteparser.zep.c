@@ -138,7 +138,7 @@ PHP_METHOD(SnailRoute_RouteParser_StdRouteParser, parsePlaceholders) {
 	ZEPHIR_CALL_FUNCTION(&_2, "preg_match_all", NULL, 18, _0, route, matches, _1);
 	ZEPHIR_UNREF(matches);
 	zephir_check_call_status();
-	if (!zephir_is_true(_2)) {
+	if (!(zephir_is_true(_2))) {
 		zephir_create_array(return_value, 1, 0 TSRMLS_CC);
 		zephir_array_fast_append(return_value, route);
 		RETURN_MM();
