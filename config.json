@@ -52,8 +52,13 @@
         "check-invalid-reads": false,
         "internal-call-transformation": false
     },
+<<<<<<< HEAD
+    "namespace": "snailcontainer",
+    "name": "snailcontainer",
+=======
     "namespace": "snailroute",
     "name": "snailroute",
+>>>>>>> e79263c229b39c2f034e70f7587ca6f43eaa3c3f
     "description": "",
     "author": "",
     "version": "0.0.1",
