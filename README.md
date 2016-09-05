@@ -1,2 +1,2 @@
 # SnailRoute
-request router for php
+http request router for php worked as php-extension
